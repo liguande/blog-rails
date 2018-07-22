@@ -1,0 +1,11 @@
+  <% if user.errors.any? %>
+    <div class="ui negative message">
+      <i class="close icon"></i>
+      <div class="header">
+        对不起，您的输入有误！
+      </div>
+      <% user.errors.full_messages.each do |e| %>
+        <p><%= e %></p>
+      <% end %>
+    </div>
+  <% end %>

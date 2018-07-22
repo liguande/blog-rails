@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogRails</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class = "<%= params[:controller] %>-<%= params[:action] %>">
+    <div class="ui secondary pointing massive red menu">
+      <div class="ui container">
+        <% if params[:controller] == "welcome" && params[:action] == "index" %>
+          <a class="active item" href="<%= root_path %>">
+        <% else %>
+          <a class="item" href="<%= root_path %>">
+        <% end %>
+          首页
+        </a>
+        <% if params[:controller] == "welcome" && params[:action] == "about" %>
+          <a class="active item" href="<%= about_path %>">
+        <% else %>
+          <a class="item" href="<%= about_path %>">
+        <% end %>
+          关于
+        </a>
+        <div class="right menu">
+          <% if !current_user %>
+            <% if params[:controller] == "users" && params[:action] == "new" %>
+              <a class="active item" href="<%= new_user_path %>">
+            <% else %>
+              <a class="item" href="<%= new_user_path %>">
+            <% end %>
+              注册
+            </a>
+            <% if params[:controller] == "users" && params[:action] == "sign_in" %>
+              <a class="active item" href="<%= sign_in_path %>">
+            <% else %>
+              <a class="item" href="<%= sign_in_path %>">
+            <% end %>
+              登录
+            </a>
+          <% else %>
+              <div class="ui dropdown item">
+              <%= current_user.username %>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <%= link_to "个人中心",user_path(session[:user_id]),style: "color:#000",:class => "item" %>
+                <%= link_to "退出登录",logout_path,method: :delete,style: "color:#000",:class => "item"%>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui container">
+      <%= yield %>
+    </div>
+
+    <script>
+      $(function(){
+        $('.message .close').on('click', function() {
+          $(this).closest('.message').transition('fade');
+        });
+        $('.ui.dropdown.item').dropdown({transition: 'drop'});
+      })
+    </script>
+  </body>
+</html>

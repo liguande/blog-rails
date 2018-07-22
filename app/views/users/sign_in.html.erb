@@ -1,0 +1,65 @@
+<style>
+  .sign-in-form{
+    margin:0 auto 0 auto;
+    width: 40vw;
+    margin-top:25vh;
+    padding:10px;
+    box-shadow: 0 2px 8px 0 rgba(7,17,27,.6);
+  }
+  .field_with_errors{
+    width:100%;
+  }
+</style>
+
+<script>
+  $(function(){
+    $(".center.aligned.column").on("click",function(){
+      window.location.href = "<%= new_user_path %>"
+    })
+  })
+</script>
+
+<div class="sign-in-form">
+  <h1>用户登录</h1>
+  <div class="ui two column middle aligned very relaxed stackable grid">
+    <div class="column">
+      <%= form_for @user,url: sign_in_session_path,method: :post,:html => {:class=>"ui form error"} do |f| %>
+        <% if @user.errors[:username].any? %>
+          <div class="field error">
+        <% else %>
+        <div class="field">
+        <% end %>
+          <%= f.label "用户名" %>
+          <div class="ui left icon input">
+            <%= f.text_field :username,placeholder: "用户名", :style => "padding-left: 2.67142857em !important;width:100%" %>
+            <i class="user icon"></i>
+          </div>
+        </div>
+        <% if @user.errors[:password].any? %>
+          <div class="field error">
+        <% else %>
+        <div class="field">
+        <% end %>
+          <%= f.label "密码" %>
+          <div class="ui left icon input">
+            <%= f.password_field :password,placeholder: "密码",:style => "padding-left: 2.67142857em !important;width:100%"%>
+            <i class="lock icon"></i>
+          </div>
+        </div>
+        <%= f.submit "登录",:class => "ui blue submit button" %>
+      <% end %>
+    </div>
+    <div class="ui vertical divider" style="left:50%;height:100px;">
+      或
+    </div>
+    <div class="center aligned column">
+      <div class="ui big green labeled icon button">
+        <i class="signup icon"></i>
+          注册
+      </div>
+    </div>
+  </div>
+  <%= render partial: "user_errors",locals:{ user: @user } %>
+</div>
+
+

@@ -1,0 +1,58 @@
+<style>
+	.new-user-form{
+		margin:0 auto 0 auto;
+		width: 40vw;
+		margin-top:10vh;
+		padding:10px;
+		box-shadow: 0 2px 8px 0 rgba(7,17,27,.6);
+	}
+</style>
+
+<script>
+	$(function(){
+		$(".rucaptcha-image-box").on("click",function(){
+			$(this).children('img').attr("src",$(this).children('img').attr("src"))
+		})
+	})
+</script>
+
+<div class="new-user-form">
+	<h1 style="text-align: center">用户注册</h1>
+	<%= form_for @user,method: :post,:html => {:class => 'ui form error'} do |f| %>
+		<% if @user.errors[:username].any? %>
+			<div class="field error">
+		<% else %>
+			<div class="field">
+		<% end %>
+			<%= f.label "用户名" %>
+			<%= f.text_field :username %>
+		</div>
+		<% if @user.errors[:password].any? %>
+			<div class="field error">
+		<% else %>
+			<div class="field">
+		<% end %>
+			<%= f.label "密码" %>
+			<%= f.password_field :password %>
+		</div>
+		<% if @user.errors[:password_confirmation].any? %>
+			<div class="field error">
+		<% else %>
+			<div class="field">
+		<% end %>
+			<%= f.label "确认密码" %>
+			<%= f.password_field :password_confirmation %>
+		</div>
+		<div class="field">
+			<%= f.label "验证码" %>
+			<%= rucaptcha_input_tag(placeholder: '请于此输入验证码') %>
+		</div>
+		<div class="field">
+			<a class="rucaptcha-image-box" href="javascript:void(0)">
+				<%= rucaptcha_image_tag %>
+			</a>
+		</div>
+		<%= f.submit "注册",:class => "ui button fluid primary" %>
+	<% end %>
+	<%= render partial: "user_errors",locals:{ user: @user } %>
+</div>

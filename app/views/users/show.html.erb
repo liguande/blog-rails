@@ -1,0 +1,62 @@
+<div class="ui grid" style="padding-top:10px;">
+	<div class="four wide column">
+		<div class="ui card">
+			<div class="image">
+				<a class="ui left corner red label">
+					<i class="heart icon"></i>
+				</a>
+				<img src="<%= image_url 'head.jpg' %>">
+			</div>
+			<div class="content">
+				<a class="ui red tag label" style="float: right;">Upcoming</a>
+				<a class="header"><%= @user.username %></a>
+				<div class="meta">
+					<span class="date">创建于：<%= time_ago_in_words @user.created_at %></span>
+				</div>
+				<div class="description">
+					Kristy is an art director living in New York.
+				</div>
+			</div>
+			<div class="extra content">
+				<a>
+					<i class="user icon"></i>22 Friends
+				</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="two wide column"></div>
+	<div class="ten wide column">
+		<div class="ui unstackable items">
+			<div class="item">
+				<div class="content">
+					<a class="header">Header</a>
+					<div class="meta">
+						<span>Description</span>
+					</div>
+					<div class="description">
+						<p></p>
+					</div>
+					<div class="extra">
+						Additional Details
+					</div>
+				</div>
+			</div>
+			<div class="item">
+				<div class="content">
+					<a class="header">Header</a>
+					<div class="meta">
+						<span>Description</span>
+					</div>
+					<div class="description">
+						<p></p>
+					</div>
+					<div class="extra">
+						Additional Details
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
